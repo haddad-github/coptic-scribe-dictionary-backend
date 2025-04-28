@@ -17,20 +17,12 @@ import (
 	"coptic_dictionary/api/routers"
 )
 
-//Load the .env with dotEnv and make viper retrieve the variables
 func loadConfig() {
-	//If loading the file fails, err will contain the error message
-	//Otherwise, err will be nil (0 value for many types)
-	err := godotenv.Load(".env")
+    //Try to load .env file, but don't crash if it's missing
+    _ = godotenv.Load()
 
-	//If err is not nil, then loading the file failed
-	if err != nil {
-		//Log that it failed and display the error
-		log.Fatal("Error loading .env file:", err)
-	}
-
-	//Viper reads the env variables
-	viper.AutomaticEnv()
+    //Always load from environment variables
+    viper.AutomaticEnv()
 }
 
 //global variable; pointer, a reference to the actual database connection

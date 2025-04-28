@@ -1,0 +1,28 @@
+name: Deploy Dictionary Backend
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'api/**'
+      - 'Dockerfile'
+      - '.github/workflows/azure-dictionary-backend-deploy.yml'
+      - 'go.mod'
+      - 'go.sum'
+      - 'main.go'
+
+jobs:
+  build-and-push-to-dockerhub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t gigahanma/coptic-dictionary-backend:latest ./api
+          docker push gigahanma/coptic-dictionary-backend:latest

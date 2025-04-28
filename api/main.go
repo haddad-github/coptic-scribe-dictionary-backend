@@ -85,8 +85,16 @@ func main() {
 	//Initialize Gin router
 	r := gin.Default()
 
-	//CORS
-	r.Use(cors.Default())
+    //CORS configuration
+    corsConfig := cors.Config{
+        AllowOrigins:     []string{"https://copticscribe.com"},
+        AllowMethods:     []string{"GET", "OPTIONS"},
+        AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+        AllowCredentials: true,
+    }
+
+    //Apply CORS config
+    r.Use(cors.New(corsConfig))
 
 	//Set up routes using modular router package
 	routers.SetupRoutes(r, db)

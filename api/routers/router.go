@@ -14,10 +14,6 @@ import (
 func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 	//Define the GET routes
 	//router.[TYPE_OF_REQUEST]("/[ROUTE]", function)
-	// Test endpoint to verify backend is reachable
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "pong"})
-	})
 	r.GET("/words", handlers.GetCopticWords(db))
 	r.GET("/word", handlers.GetOneCopticWord(db))
 }

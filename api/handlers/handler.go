@@ -5,9 +5,9 @@ package handlers
 import (
 	"log"
 	"net/http"
-	"strings"
+	//"strings"
 	"github.com/gin-gonic/gin"
-	"github.com/texttheater/golang-levenshtein/levenshtein"
+	//"github.com/texttheater/golang-levenshtein/levenshtein"
 	"gorm.io/gorm"
 	"coptic_dictionary/api/models"
 )

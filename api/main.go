@@ -79,7 +79,7 @@ func main() {
 
     //CORS configuration
     corsConfig := cors.Config{
-        AllowOrigins:     []string{"https://copticscribe.com", "https://blue-smoke-09f427910-1.centralus.6.azurestaticapps.net"},
+        AllowOrigins:     []string{"https://copticscribe.com", "https://blue-smoke-09f427910-1.centralus.6.azurestaticapps.net/"},
         AllowMethods:     []string{"GET", "OPTIONS"},
         AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
         AllowCredentials: true,
@@ -92,10 +92,5 @@ func main() {
 	routers.SetupRoutes(r, db)
 
 	//Start server on port 8080
-    port := viper.GetString("PORT")
-    if port == "" {
-        port = "8080"
-    }
-    r.Run("0.0.0.0:" + port)
-
+	r.Run(":8080")
 }

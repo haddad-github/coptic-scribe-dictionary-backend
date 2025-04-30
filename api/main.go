@@ -91,6 +91,11 @@ func main() {
 	//Set up routes using modular router package
 	routers.SetupRoutes(r, db)
 
-	//Start server on port 8080
-	r.Run(":8080")
+    //Run on port
+    port := viper.GetString("PORT")
+    if port == "" {
+        port = "8080" //fallback for local dev
+    }
+    r.Run("0.0.0.0:" + port)
+
 }
